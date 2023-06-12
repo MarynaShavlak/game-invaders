@@ -10,12 +10,18 @@ function createEnemy() {
 
 function moveEnemy(enemy) {
   let timerID = setInterval(() => {
-    enemy.style.top = enemy.offsetTop + 4 + 'px';
+    enemy.style.top = enemy.offsetTop + 8 + 'px';
     const isEnemyOutField =
-      enemy.style.top > document.querySelector('body').offsetHeight;
+      enemy.offsetTop > document.querySelector('body').offsetHeight;
     if (isEnemyOutField) {
       enemy.remove();
       clearInterval(timerID);
     }
   }, 1);
+}
+
+function removeEnemy(enemy) {
+  setTimeout(() => {
+    enemy.remove();
+  }, 800);
 }

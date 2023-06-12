@@ -57,25 +57,26 @@ function makeShot() {
 }
 
 function isHit(bulletEl) {
-  const enemy = document.querySelector('.enemy');
-  const isEnemyExist = enemy && !enemy.classList.contains('boom');
-  if (isEnemyExist) {
-    const top =
-      bulletEl.offsetTop > enemy.offsetTop &&
-      bulletEl.offsetTop < enemy.offsetTop + enemy.offsetHeight;
-    const left =
-      bulletEl.offsetLeft > enemy.offsetLeft &&
-      bulletEl.offsetTLeft < enemy.offsetLeft + enemy.offsetWidth;
-    if (top || left) {
-      enemy.className = 'enemy boom';
-      setTimeout(() => {
-        enemy.remove();
-      }, 800);
-      console.log('hit');
-      return true;
+  const enemiesList = document.querySelectorAll('.enemy');
+  for (let i = 0; i < enemiesList.length; i++) {
+    enemy = enemiesList[i];
+    console.dir(enemy);
+    let isEnemyExist = enemy && !enemy.classList.contains('boom');
+    if (isEnemyExist) {
+      let top =
+        bulletEl.offsetTop > enemy.offsetTop &&
+        bulletEl.offsetTop < enemy.offsetTop + enemy.offsetHeight;
+      let left =
+        bulletEl.offsetLeft > enemy.offsetLeft &&
+        bulletEl.offsetLeft < enemy.offsetLeft + enemy.offsetWidth;
+      if (top || left) {
+        enemy.className = 'enemy boom';
+        removeEnemy(enemy);
+
+        return true;
+      }
     }
   }
-
   return false;
 }
 
