@@ -10,7 +10,7 @@ function createEnemy() {
 
 function moveEnemy(enemy) {
   let timerID = setInterval(() => {
-    enemy.style.top = enemy.offsetTop + 8 + 'px';
+    enemy.style.top = enemy.offsetTop + 4 + 'px';
     const isEnemyOutField =
       enemy.offsetTop > document.querySelector('body').offsetHeight;
     if (isEnemyOutField) {

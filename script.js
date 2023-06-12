@@ -34,10 +34,16 @@ document.onkeydown = function (e) {
 };
 
 function moveLeft() {
-  player.style.left = player.offsetLeft - 20 + 'px';
+  if (player.offsetLeft - 30 >= 100) {
+    player.style.left = player.offsetLeft - 30 + 'px';
+  }
 }
 function moveRight() {
-  player.style.left = player.offsetLeft + 20 + 'px';
+  const gameFieldWidth = document.querySelector('body').offsetWidth;
+
+  if (player.offsetLeft + player.offsetWidth + 30 <= gameFieldWidth - 100) {
+    player.style.left = player.offsetLeft + 30 + 'px';
+  }
 }
 function makeShot() {
   let bulletEl = document.createElement('div');
@@ -59,8 +65,7 @@ function makeShot() {
 function isHit(bulletEl) {
   const enemiesList = document.querySelectorAll('.enemy');
   for (let i = 0; i < enemiesList.length; i++) {
-    enemy = enemiesList[i];
-    console.dir(enemy);
+    let enemy = enemiesList[i];
     let isEnemyExist = enemy && !enemy.classList.contains('boom');
     if (isEnemyExist) {
       let top =
@@ -69,7 +74,7 @@ function isHit(bulletEl) {
       let left =
         bulletEl.offsetLeft > enemy.offsetLeft &&
         bulletEl.offsetLeft < enemy.offsetLeft + enemy.offsetWidth;
-      if (top || left) {
+      if (top && left) {
         enemy.className = 'enemy boom';
         removeEnemy(enemy);
 
