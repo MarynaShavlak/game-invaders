@@ -105,9 +105,14 @@ html {
     animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
+    background-size: contain;
 }
 
-
+.asteroid.boom {
+    background-image: url(../images/asteroid-boom.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
 @keyframes spin {
     100% {

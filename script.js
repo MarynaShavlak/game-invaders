@@ -52,9 +52,10 @@ function makeShot() {
   bulletEl.style.left = player.offsetLeft + player.offsetWidth / 2 + 'px';
   appEl.appendChild(bulletEl);
   let timerID = setInterval(() => {
-    const isEnemyKilled = isHit(bulletEl);
+    const isEnemyKilled = isTargetHit(bulletEl, 'enemy');
+    const isAsteroidRuined = isTargetHit(bulletEl, 'asteroid');
     const isBulletOutField = bulletEl.offsetTop < 0;
-    if (isEnemyKilled || isBulletOutField) {
+    if (isEnemyKilled || isBulletOutField || isAsteroidRuined) {
       bulletEl.remove();
       clearInterval(timerID);
     }
@@ -62,29 +63,51 @@ function makeShot() {
   }, 100);
 }
 
-function isHit(bulletEl) {
-  const enemiesList = document.querySelectorAll('.enemy');
-  for (let i = 0; i < enemiesList.length; i++) {
-    let enemy = enemiesList[i];
-    let isEnemyExist = enemy && !enemy.classList.contains('boom');
-    if (isEnemyExist) {
-      let top =
-        bulletEl.offsetTop > enemy.offsetTop &&
-        bulletEl.offsetTop < enemy.offsetTop + enemy.offsetHeight;
-      let left =
-        bulletEl.offsetLeft > enemy.offsetLeft &&
-        bulletEl.offsetLeft < enemy.offsetLeft + enemy.offsetWidth;
-      if (top && left) {
-        enemy.className = 'enemy boom';
-        // removeEnemy(enemy);
-        removeTargetToHit(enemy);
+// function isEnemyHit(bulletEl) {
+//   const enemiesList = document.querySelectorAll('.enemy');
+//   for (let i = 0; i < enemiesList.length; i++) {
+//     let enemy = enemiesList[i];
+//     let isEnemyExist = enemy && !enemy.classList.contains('boom');
+//     if (isEnemyExist) {
+//       let top =
+//         bulletEl.offsetTop > enemy.offsetTop &&
+//         bulletEl.offsetTop < enemy.offsetTop + enemy.offsetHeight;
+//       let left =
+//         bulletEl.offsetLeft > enemy.offsetLeft &&
+//         bulletEl.offsetLeft < enemy.offsetLeft + enemy.offsetWidth;
+//       if (top && left) {
+//         enemy.className = 'enemy boom';
+//         removeTargetToHit(enemy);
 
-        return true;
-      }
-    }
-  }
-  return false;
-}
+//         return true;
+//       }
+//     }
+//   }
+//   return false;
+// }
+
+// function isAsteroidHit(bulletEl) {
+//   const asteroidsList = document.querySelectorAll('.asteroid');
+//   for (let i = 0; i < asteroidsList.length; i++) {
+//     let asteroid = asteroidsList[i];
+//     let isAsteroidExist = asteroid && !asteroid.classList.contains('boom');
+//     if (isAsteroidExist) {
+//       let top =
+//         bulletEl.offsetTop > asteroid.offsetTop &&
+//         bulletEl.offsetTop < asteroid.offsetTop + asteroid.offsetHeight;
+//       let left =
+//         bulletEl.offsetLeft > asteroid.offsetLeft &&
+//         bulletEl.offsetLeft < asteroid.offsetLeft + asteroid.offsetWidth;
+//       if (top && left) {
+//         asteroid.className = 'asteroid boom';
+//         removeTargetToHit(asteroid);
+
+//         return true;
+//       }
+//     }
+//   }
+//   return false;
+// }
 
 function randomCoordinate(min, max) {
   let rand = min + Math.random() * (max + 1 - min);
@@ -117,4 +140,27 @@ function removeTargetToHit(target) {
   setTimeout(() => {
     target.remove();
   }, 800);
+}
+
+function isTargetHit(bulletEl, targetType) {
+  const targetsList = document.querySelectorAll('.' + targetType);
+  for (let i = 0; i < targetsList.length; i++) {
+    let target = targetsList[i];
+    let isTargetExist = target && !target.classList.contains('boom');
+    if (isTargetExist) {
+      let top =
+        bulletEl.offsetTop > target.offsetTop &&
+        bulletEl.offsetTop < target.offsetTop + target.offsetHeight;
+      let left =
+        bulletEl.offsetLeft > target.offsetLeft &&
+        bulletEl.offsetLeft < target.offsetLeft + target.offsetWidth;
+      if (top && left) {
+        target.className = targetType + ' boom';
+        removeTargetToHit(target);
+
+        return true;
+      }
+    }
+  }
+  return false;
 }
