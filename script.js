@@ -76,7 +76,8 @@ function isHit(bulletEl) {
         bulletEl.offsetLeft < enemy.offsetLeft + enemy.offsetWidth;
       if (top && left) {
         enemy.className = 'enemy boom';
-        removeEnemy(enemy);
+        // removeEnemy(enemy);
+        removeTargetToHit(enemy);
 
         return true;
       }
@@ -88,4 +89,32 @@ function isHit(bulletEl) {
 function randomCoordinate(min, max) {
   let rand = min + Math.random() * (max + 1 - min);
   return Math.floor(rand);
+}
+
+function createTargetToHit(className) {
+  const gameFieldWidth = document.querySelector('body').offsetWidth;
+  const left = randomCoordinate(150, gameFieldWidth - 150);
+  const targetToHitEl = document.createElement('div');
+  targetToHitEl.className = className;
+  targetToHitEl.style.left = left + 'px';
+  appEl.appendChild(targetToHitEl);
+  return targetToHitEl;
+}
+
+function moveTargetToHit(target) {
+  let timerID = setInterval(() => {
+    target.style.top = target.offsetTop + 4 + 'px';
+    const isTargetOutField =
+      target.offsetTop > document.querySelector('body').offsetHeight;
+    if (isTargetOutField) {
+      target.remove();
+      clearInterval(timerID);
+    }
+  }, 1);
+}
+
+function removeTargetToHit(target) {
+  setTimeout(() => {
+    target.remove();
+  }, 800);
 }

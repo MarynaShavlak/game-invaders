@@ -93,3 +93,24 @@ html {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+.asteroid {
+    position: absolute;
+    top: -100px;
+    width: 100px;
+    height: 65px;
+    background-image: url(../images/asteroid1.png);
+    transition: all 300ms ease-out;
+    animation-name: spin;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
