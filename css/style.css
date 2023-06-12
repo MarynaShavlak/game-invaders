@@ -26,3 +26,48 @@ html {
     max-height: 150px;
     margin: 20px;
 }
+#player {
+    position: absolute;
+    bottom: 60px;
+    left:calc(50% - 75px);
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    transition: all 300ms ease-out;
+}
+
+#player.skin1 {
+    background-image: url(../images/space-ship-1.png);
+}
+#player.skin2 {
+    background-image: url(../images/space-ship-2.png);
+}
+#player.skin3 {
+    background-image: url(../images/space-ship-3.png);
+}
+
+.bullet {
+    position: absolute;
+    bottom: 220px;
+    left: 50%;
+    width: 4px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 6px/10px;
+    box-shadow: 0 0 10px, 0 0  2px inset;
+    animation : glow 1500ms  linear infinite;
+}
+@keyframes glow {
+    from {
+        color: lime;
+        box-shadow: 0 0 9px lime;
+    }
+    50% {
+        color: lime;
+        box-shadow: 0 0 18px lime;
+    }
+    to {
+        color: lime;
+        box-shadow: 0 0 9px lime;
+    }
+}

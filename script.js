@@ -13,3 +13,43 @@
  *
  *
  */
+const appEl = document.querySelector('#app');
+const player = document.querySelector('#player');
+
+document.onclick = function () {
+  moveLeft();
+};
+document.onkeydown = function (e) {
+  switch (e.code) {
+    case 'ArrowRight':
+      moveRight();
+      break;
+    case 'ArrowLeft':
+      moveLeft();
+      break;
+    case 'Space':
+      makeShot();
+      break;
+  }
+};
+
+function moveLeft() {
+  player.style.left = player.offsetLeft - 20 + 'px';
+}
+function moveRight() {
+  player.style.left = player.offsetLeft + 20 + 'px';
+}
+function makeShot() {
+  let bulletEl = document.createElement('div');
+  bulletEl.classList.add('bullet');
+  bulletEl.style.top = player.offsetTop + 'px';
+  bulletEl.style.left = player.offsetLeft + player.offsetWidth / 2 + 'px';
+  appEl.appendChild(bulletEl);
+  let timerID = setInterval(() => {
+    if (bulletEl.offsetTop < 0) {
+      bulletEl.remove();
+      clearInterval(timerID);
+    }
+    bulletEl.style.top = bulletEl.offsetTop - 10 + 'px';
+  }, 100);
+}
