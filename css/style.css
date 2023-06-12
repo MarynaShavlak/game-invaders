@@ -17,15 +17,44 @@ html {
     z-index: 9999;
     height: 100%;
     width: 100%;
+    padding-top: 40px;
     
 }
 
-#app img {
+.start-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;   
+    width: 400px;
+    height: 400px;
+    padding: 30px 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.start-game p {
+    font-weight: 900;
+    font-size: 30px;
+    text-align: center;
+    margin: 0;
+    font-family: monospace;
+    color: #5B42F3;
+}
+
+
+ img {
     max-width: 150px;
     display: inline-block;
     max-height: 150px;
-    margin: 20px;
+  
 }
+
+.skin img {
+    width: 120px;
+}
+
+
 #player {
     position: absolute;
     bottom: 60px;
@@ -35,6 +64,17 @@ html {
     background-size: contain;
     transition: all 300ms ease-out;
 }
+
+.skinsList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+
 
 #player.skin1 {
     background-image: url(../images/space-ship-1.png);
@@ -118,4 +158,56 @@ html {
     100% {
         transform: rotate(360deg);
     }
+}
+
+
+
+
+
+
+/* CSS */
+.start-button {
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-family: Phantomsans, sans-serif;
+    font-size: 20px;
+   line-height: 1em;
+    max-width: 100%;
+    min-width: 140px;
+    padding: 10px 3px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.start-button:active,
+.start-button:hover {
+    outline: 0;
+}
+
+.start-button span {
+    background-color: rgb(5, 6, 45);
+    padding: 7px 40px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.start-button:hover span {
+    background: none;
 }

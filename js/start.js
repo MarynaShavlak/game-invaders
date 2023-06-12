@@ -1,8 +1,8 @@
-createEnemy();
-createEnemy();
-createEnemy();
-createEnemy();
-createEnemy();
-createAsteroid();
-createAsteroid();
-createAsteroid();
+// createEnemy();
+// createEnemy();
+// createEnemy();
+// createEnemy();
+// createEnemy();
+// createAsteroid();
+// createAsteroid();
+// createAsteroid();

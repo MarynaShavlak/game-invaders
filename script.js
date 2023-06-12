@@ -45,6 +45,7 @@ function moveRight() {
     player.style.left = player.offsetLeft + 30 + 'px';
   }
 }
+
 function makeShot() {
   let bulletEl = document.createElement('div');
   bulletEl.classList.add('bullet');
@@ -62,52 +63,6 @@ function makeShot() {
     bulletEl.style.top = bulletEl.offsetTop - 10 + 'px';
   }, 100);
 }
-
-// function isEnemyHit(bulletEl) {
-//   const enemiesList = document.querySelectorAll('.enemy');
-//   for (let i = 0; i < enemiesList.length; i++) {
-//     let enemy = enemiesList[i];
-//     let isEnemyExist = enemy && !enemy.classList.contains('boom');
-//     if (isEnemyExist) {
-//       let top =
-//         bulletEl.offsetTop > enemy.offsetTop &&
-//         bulletEl.offsetTop < enemy.offsetTop + enemy.offsetHeight;
-//       let left =
-//         bulletEl.offsetLeft > enemy.offsetLeft &&
-//         bulletEl.offsetLeft < enemy.offsetLeft + enemy.offsetWidth;
-//       if (top && left) {
-//         enemy.className = 'enemy boom';
-//         removeTargetToHit(enemy);
-
-//         return true;
-//       }
-//     }
-//   }
-//   return false;
-// }
-
-// function isAsteroidHit(bulletEl) {
-//   const asteroidsList = document.querySelectorAll('.asteroid');
-//   for (let i = 0; i < asteroidsList.length; i++) {
-//     let asteroid = asteroidsList[i];
-//     let isAsteroidExist = asteroid && !asteroid.classList.contains('boom');
-//     if (isAsteroidExist) {
-//       let top =
-//         bulletEl.offsetTop > asteroid.offsetTop &&
-//         bulletEl.offsetTop < asteroid.offsetTop + asteroid.offsetHeight;
-//       let left =
-//         bulletEl.offsetLeft > asteroid.offsetLeft &&
-//         bulletEl.offsetLeft < asteroid.offsetLeft + asteroid.offsetWidth;
-//       if (top && left) {
-//         asteroid.className = 'asteroid boom';
-//         removeTargetToHit(asteroid);
-
-//         return true;
-//       }
-//     }
-//   }
-//   return false;
-// }
 
 function randomCoordinate(min, max) {
   let rand = min + Math.random() * (max + 1 - min);
