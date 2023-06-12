@@ -13,55 +13,24 @@
  *
  *
  */
+
 const appEl = document.querySelector('#app');
-const player = document.querySelector('#player');
+const firstSkin = document.querySelector('.skin1');
+const secondSkin = document.querySelector('.skin2');
+const thirdSkin = document.querySelector('.skin3');
 
-document.onclick = function () {
-  moveLeft();
-};
-document.onkeydown = function (e) {
-  switch (e.code) {
-    case 'ArrowRight':
-      moveRight();
-      break;
-    case 'ArrowLeft':
-      moveLeft();
-      break;
-    case 'Space':
-      makeShot();
-      break;
-  }
-};
+firstSkin.onclick = onSkinClick;
+secondSkin.onclick = onSkinClick;
+thirdSkin.onclick = onSkinClick;
+let selectedSkinClass;
 
-function moveLeft() {
-  if (player.offsetLeft - 30 >= 100) {
-    player.style.left = player.offsetLeft - 30 + 'px';
-  }
-}
-function moveRight() {
-  const gameFieldWidth = document.querySelector('body').offsetWidth;
-
-  if (player.offsetLeft + player.offsetWidth + 30 <= gameFieldWidth - 100) {
-    player.style.left = player.offsetLeft + 30 + 'px';
-  }
-}
-
-function makeShot() {
-  let bulletEl = document.createElement('div');
-  bulletEl.classList.add('bullet');
-  bulletEl.style.top = player.offsetTop + 'px';
-  bulletEl.style.left = player.offsetLeft + player.offsetWidth / 2 + 'px';
-  appEl.appendChild(bulletEl);
-  let timerID = setInterval(() => {
-    const isEnemyKilled = isTargetHit(bulletEl, 'enemy');
-    const isAsteroidRuined = isTargetHit(bulletEl, 'asteroid');
-    const isBulletOutField = bulletEl.offsetTop < 0;
-    if (isEnemyKilled || isBulletOutField || isAsteroidRuined) {
-      bulletEl.remove();
-      clearInterval(timerID);
-    }
-    bulletEl.style.top = bulletEl.offsetTop - 10 + 'px';
-  }, 100);
+function onSkinClick(e) {
+  const selectedSkin = e.currentTarget;
+  selectedSkinClass = selectedSkin.className.split(' ')[1];
+  firstSkin.classList.remove('active');
+  secondSkin.classList.remove('active');
+  thirdSkin.classList.remove('active');
+  selectedSkin.classList.add('active');
 }
 
 function randomCoordinate(min, max) {
@@ -94,6 +63,12 @@ function moveTargetToHit(target) {
 function removeTargetToHit(target) {
   setTimeout(() => {
     target.remove();
+    const randomNumber = Math.random();
+    if (randomNumber < 0.5) {
+      createEnemy();
+    } else {
+      createAsteroid();
+    }
   }, 800);
 }
 

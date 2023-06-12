@@ -25,8 +25,8 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;   
-    width: 400px;
-    height: 400px;
+    width: 450px;
+    height: 350px;
     padding: 30px 10px;
     background-color: #fff;
     border-radius: 10px;
@@ -50,8 +50,10 @@ html {
   
 }
 
+
 .skin img {
     width: 120px;
+    height: auto;
 }
 
 
@@ -63,6 +65,8 @@ html {
     height: 150px;
     background-size: contain;
     transition: all 300ms ease-out;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .skinsList {
@@ -70,17 +74,43 @@ html {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    column-gap: 15px;
     
 }
 
+.skin {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: border 300ms ease-out,
+    transform 300ms ease-out;
+    cursor: pointer;
+}
 
+.skin:hover,
+.skin:focus {
+    transform: scale(1.2);
+}
+
+.skin.active {
+    border: 2px solid #5B42F3;
+    background-color: rgba(175, 64, 255, 0.4);
+    
+    
+}
 
 #player.skin1 {
     background-image: url(../images/space-ship-1.png);
 }
 #player.skin2 {
     background-image: url(../images/space-ship-2.png);
+    width: 150px;
+    height: 200px;
+    /* bottom:150px; */
 }
 #player.skin3 {
     background-image: url(../images/space-ship-3.png);
@@ -211,3 +241,4 @@ html {
 .start-button:hover span {
     background: none;
 }
+
