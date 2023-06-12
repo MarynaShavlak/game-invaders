@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    height: 100%;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+html {
+    background: radial-gradient(ellipse, #1b2735 0%, #090a0f 100%);
+}
+
+#app {
+    min-height: 100%;
+    position: relative;
+    z-index: 9999;
+    height: 100%;
+    width: 100%;
+    
+}
+
+#app img {
+    max-width: 150px;
+    display: inline-block;
+    max-height: 150px;
+    margin: 20px;
+}
