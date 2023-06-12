@@ -46,10 +46,35 @@ function makeShot() {
   bulletEl.style.left = player.offsetLeft + player.offsetWidth / 2 + 'px';
   appEl.appendChild(bulletEl);
   let timerID = setInterval(() => {
-    if (bulletEl.offsetTop < 0) {
+    const isEnemyKilled = isHit(bulletEl);
+    const isBulletOutField = bulletEl.offsetTop < 0;
+    if (isEnemyKilled || isBulletOutField) {
       bulletEl.remove();
       clearInterval(timerID);
     }
     bulletEl.style.top = bulletEl.offsetTop - 10 + 'px';
   }, 100);
+}
+
+function isHit(bulletEl) {
+  const enemy = document.querySelector('.enemy');
+  const isEnemyExist = enemy && !enemy.classList.contains('boom');
+  if (isEnemyExist) {
+    const top =
+      bulletEl.offsetTop > enemy.offsetTop &&
+      bulletEl.offsetTop < enemy.offsetTop + enemy.offsetHeight;
+    const left =
+      bulletEl.offsetLeft > enemy.offsetLeft &&
+      bulletEl.offsetTLeft < enemy.offsetLeft + enemy.offsetWidth;
+    if (top || left) {
+      enemy.className = 'enemy boom';
+      setTimeout(() => {
+        enemy.remove();
+      }, 800);
+      console.log('hit');
+      return true;
+    }
+  }
+
+  return false;
 }
