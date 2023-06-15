@@ -7,16 +7,10 @@ function onStartGame() {
     startGameBlock.style.display = 'none';
     createPlayer(selectedSkinClass);
     createEnemy();
-    createEnemy();
-    createEnemy();
-    createEnemy();
-    createEnemy();
-    createEnemy();
-    createEnemy();
-    createEnemy();
-    createEnemy();
-    createAsteroid();
-    createAsteroid();
+    // createEnemy();
+    // createEnemy();
+    setBackgroundSound();
+    showLifes();
   } else {
     alert('Please, chose your ship to start the game');
   }

@@ -33,6 +33,7 @@ function makeShot() {
   bulletEl.style.top = player.offsetTop + 'px';
   bulletEl.style.left = player.offsetLeft + player.offsetWidth / 2 + 'px';
   appEl.appendChild(bulletEl);
+  setBlasterSound();
   let timerID = setInterval(() => {
     const isEnemyKilled = isTargetHit(bulletEl, 'enemy');
     const isAsteroidRuined = isTargetHit(bulletEl, 'asteroid');

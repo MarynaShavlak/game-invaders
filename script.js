@@ -50,25 +50,46 @@ function createTargetToHit(className) {
 
 function moveTargetToHit(target) {
   let timerID = setInterval(() => {
-    target.style.top = target.offsetTop + 4 + 'px';
+    target.style.top = target.offsetTop + 30 + 'px';
     const isTargetOutField =
       target.offsetTop > document.querySelector('body').offsetHeight;
+
     if (isTargetOutField) {
       target.remove();
+      createNewTarget();
+      decreaseLifesQauntity();
       clearInterval(timerID);
     }
   }, 1);
+  setInterval(() => {
+    let targetCoords = getCoordinatesAndDimensions(target);
+    let playerCoords = getCoordinatesAndDimensions(playerEl);
+    let playerX = playerCoords.x;
+    let playerY = playerCoords.y;
+    let playerWidth = playerCoords.width;
+    let playerHeight = playerCoords.height;
+    let targetX = targetCoords.x;
+    let targetY = targetCoords.y;
+    let targetWidth = targetCoords.width;
+    let targetHeight = targetCoords.height;
+    var isIntersecting = doCoordinatesIntersect(
+      playerX,
+      playerY,
+      playerWidth,
+      playerHeight,
+      targetX,
+      targetY,
+      targetWidth,
+      targetHeight,
+    );
+    console.log('Are the coordinates intersecting?', isIntersecting);
+  }, 1000);
 }
 
 function removeTargetToHit(target) {
   setTimeout(() => {
     target.remove();
-    const randomNumber = Math.random();
-    if (randomNumber < 0.5) {
-      createEnemy();
-    } else {
-      createAsteroid();
-    }
+    createNewTarget();
   }, 800);
 }
 
@@ -87,10 +108,57 @@ function isTargetHit(bulletEl, targetType) {
       if (top && left) {
         target.className = targetType + ' boom';
         removeTargetToHit(target);
-
+        setBoomSound();
         return true;
       }
     }
   }
   return false;
+}
+
+function createNewTarget() {
+  const randomNumber = Math.random();
+  if (randomNumber < 0.5) {
+    createEnemy();
+  } else {
+    createAsteroid();
+  }
+}
+
+function doCoordinatesIntersect(
+  playerX,
+  playerY,
+  playerWidth,
+  playerHeight,
+  enemyX,
+  enemyY,
+  enemyWidth,
+  enemyHeight,
+) {
+  let playerRight = playerX + playerWidth;
+  let playerBottom = playerY + playerHeight;
+  let enemyRight = enemyX + enemyWidth;
+  let enemyBottom = enemyY + enemyHeight;
+
+  if (
+    playerX < enemyRight &&
+    playerRight > enemyX &&
+    playerY < enemyBottom &&
+    playerBottom > enemyY
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+function getCoordinatesAndDimensions(element) {
+  const {
+    offsetLeft: x,
+    offsetTop: y,
+    offsetWidth: width,
+    offsetHeight: height,
+  } = element;
+
+  return { x, y, width, height };
 }

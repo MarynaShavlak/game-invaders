@@ -241,4 +241,28 @@ html {
 .start-button:hover span {
     background: none;
 }
+.menu {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 25px;
+}
+.menu .sounds svg {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    fill: #AF40FF;
+}
+.menu .lifesList img {
+    width: 30px;
+    height: 30px;
+}
+.lifesList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
 
+.hidden {
+    display: none;
+}
