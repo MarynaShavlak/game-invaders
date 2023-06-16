@@ -54,36 +54,42 @@ function moveTargetToHit(target) {
     const isTargetOutField =
       target.offsetTop > document.querySelector('body').offsetHeight;
 
-    if (isTargetOutField) {
-      target.remove();
-      createNewTarget();
-      decreaseLifesQauntity();
-      clearInterval(timerID);
-    }
-  }, 1);
-  setInterval(() => {
-    let targetCoords = getCoordinatesAndDimensions(target);
-    let playerCoords = getCoordinatesAndDimensions(playerEl);
-    let playerX = playerCoords.x;
-    let playerY = playerCoords.y;
-    let playerWidth = playerCoords.width;
-    let playerHeight = playerCoords.height;
-    let targetX = targetCoords.x;
-    let targetY = targetCoords.y;
-    let targetWidth = targetCoords.width;
-    let targetHeight = targetCoords.height;
-    var isIntersecting = doCoordinatesIntersect(
-      playerX,
-      playerY,
-      playerWidth,
-      playerHeight,
-      targetX,
-      targetY,
-      targetWidth,
-      targetHeight,
+    const targetCoords = getCoordinatesAndDimensions(target);
+    const playerCoords = getCoordinatesAndDimensions(playerEl);
+    const isIntersecting = checkIfCoordinatesIntersect(
+      playerCoords,
+      targetCoords,
     );
     console.log('Are the coordinates intersecting?', isIntersecting);
-  }, 1000);
+    if (isTargetOutField) {
+      target.remove();
+      // createNewTarget();
+      // decreaseLifesQuantity();
+      // clearInterval(timerID);
+    }
+    if (isIntersecting || isTargetOutField) {
+      decreaseLifesQuantity();
+      createNewTarget();
+      target.remove();
+      clearInterval(timerID);
+      // clearInterval(timerCoordsID);
+    }
+
+    // console.log('Are the coordinates intersecting?', isIntersecting);
+  }, 300);
+  // let timerCoordsID = setInterval(() => {
+  //   const targetCoords = getCoordinatesAndDimensions(target);
+  //   const playerCoords = getCoordinatesAndDimensions(playerEl);
+  //   const isIntersecting = checkIfCoordinatesIntersect(
+  //     playerCoords,
+  //     targetCoords,
+  //   );
+  //   console.log('Are the coordinates intersecting?', isIntersecting);
+  //   if (isIntersecting) {
+  //     decreaseLifesQuantity();
+  //     clearInterval(timerCoordsID);
+  //   }
+  // }, 300);
 }
 
 function removeTargetToHit(target) {
@@ -125,31 +131,18 @@ function createNewTarget() {
   }
 }
 
-function doCoordinatesIntersect(
-  playerX,
-  playerY,
-  playerWidth,
-  playerHeight,
-  enemyX,
-  enemyY,
-  enemyWidth,
-  enemyHeight,
-) {
-  let playerRight = playerX + playerWidth;
-  let playerBottom = playerY + playerHeight;
-  let enemyRight = enemyX + enemyWidth;
-  let enemyBottom = enemyY + enemyHeight;
+function checkIfCoordinatesIntersect(playerCoords, targetCoords) {
+  const playerRight = playerCoords.x + playerCoords.width;
+  const playerBottom = playerCoords.y + playerCoords.height;
+  const targetRight = targetCoords.x + targetCoords.width;
+  const targetBottom = targetCoords.y + targetCoords.height;
 
-  if (
-    playerX < enemyRight &&
-    playerRight > enemyX &&
-    playerY < enemyBottom &&
-    playerBottom > enemyY
-  ) {
-    return true;
-  }
-
-  return false;
+  return (
+    playerCoords.x < targetRight &&
+    playerRight > targetCoords.x &&
+    playerCoords.y < targetBottom &&
+    playerBottom > targetCoords.y
+  );
 }
 
 function getCoordinatesAndDimensions(element) {

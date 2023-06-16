@@ -5,7 +5,7 @@ function showLifes() {
   lifesList.classList.remove('hidden');
 }
 
-function decreaseLifesQauntity() {
+function decreaseLifesQuantity() {
   lifes -= 1;
   const lifeItem = document.querySelector('.life-item');
   if (!lifeItem) return;
