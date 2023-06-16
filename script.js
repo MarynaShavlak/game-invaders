@@ -14,7 +14,8 @@
  *
  */
 
-const appEl = document.querySelector('#app');
+const gameElementsBlock = document.querySelector('.game-elements');
+const endGameBlock = document.querySelector('.end-game');
 const firstSkin = document.querySelector('.skin1');
 const secondSkin = document.querySelector('.skin2');
 const thirdSkin = document.querySelector('.skin3');
@@ -39,16 +40,18 @@ function randomCoordinate(min, max) {
 }
 
 function createTargetToHit(className) {
+  if (isGameOver) return;
   const gameFieldWidth = document.querySelector('body').offsetWidth;
   const left = randomCoordinate(150, gameFieldWidth - 150);
   const targetToHitEl = document.createElement('div');
   targetToHitEl.className = className;
   targetToHitEl.style.left = left + 'px';
-  appEl.appendChild(targetToHitEl);
+  gameElementsBlock.appendChild(targetToHitEl);
   return targetToHitEl;
 }
 
 function moveTargetToHit(target) {
+  if (!target) return;
   let timerID = setInterval(() => {
     target.style.top = target.offsetTop + 30 + 'px';
     const isTargetOutField =
@@ -60,36 +63,16 @@ function moveTargetToHit(target) {
       playerCoords,
       targetCoords,
     );
-    console.log('Are the coordinates intersecting?', isIntersecting);
     if (isTargetOutField) {
       target.remove();
-      // createNewTarget();
-      // decreaseLifesQuantity();
-      // clearInterval(timerID);
     }
     if (isIntersecting || isTargetOutField) {
       decreaseLifesQuantity();
       createNewTarget();
       target.remove();
       clearInterval(timerID);
-      // clearInterval(timerCoordsID);
     }
-
-    // console.log('Are the coordinates intersecting?', isIntersecting);
   }, 300);
-  // let timerCoordsID = setInterval(() => {
-  //   const targetCoords = getCoordinatesAndDimensions(target);
-  //   const playerCoords = getCoordinatesAndDimensions(playerEl);
-  //   const isIntersecting = checkIfCoordinatesIntersect(
-  //     playerCoords,
-  //     targetCoords,
-  //   );
-  //   console.log('Are the coordinates intersecting?', isIntersecting);
-  //   if (isIntersecting) {
-  //     decreaseLifesQuantity();
-  //     clearInterval(timerCoordsID);
-  //   }
-  // }, 300);
 }
 
 function removeTargetToHit(target) {
@@ -154,4 +137,10 @@ function getCoordinatesAndDimensions(element) {
   } = element;
 
   return { x, y, width, height };
+}
+
+function endGame() {
+  isGameOver = true;
+  endGameBlock.classList.remove('hidden');
+  gameElementsBlock.innerHTML = '';
 }

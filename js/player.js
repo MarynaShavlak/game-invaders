@@ -15,15 +15,15 @@ document.onkeydown = function (e) {
 };
 
 function moveLeft() {
-  if (playerEl.offsetLeft - 30 >= 30) {
-    playerEl.style.left = playerEl.offsetLeft - 30 + 'px';
+  if (playerEl.offsetLeft - 40 >= 30) {
+    playerEl.style.left = playerEl.offsetLeft - 40 + 'px';
   }
 }
 function moveRight() {
   const gameFieldWidth = document.querySelector('body').offsetWidth;
 
-  if (playerEl.offsetLeft + playerEl.offsetWidth + 30 <= gameFieldWidth - 30) {
-    playerEl.style.left = playerEl.offsetLeft + 30 + 'px';
+  if (playerEl.offsetLeft + playerEl.offsetWidth + 40 <= gameFieldWidth - 30) {
+    playerEl.style.left = playerEl.offsetLeft + 40 + 'px';
   }
 }
 
@@ -32,7 +32,7 @@ function makeShot() {
   bulletEl.classList.add('bullet');
   bulletEl.style.top = player.offsetTop + 'px';
   bulletEl.style.left = player.offsetLeft + player.offsetWidth / 2 + 'px';
-  appEl.appendChild(bulletEl);
+  gameElementsBlock.appendChild(bulletEl);
   setBlasterSound();
   let timerID = setInterval(() => {
     const isEnemyKilled = isTargetHit(bulletEl, 'enemy');
@@ -50,5 +50,5 @@ function createPlayer(skin) {
   playerEl = document.createElement('div');
   playerEl.className = skin;
   playerEl.id = 'player';
-  appEl.appendChild(playerEl);
+  gameElementsBlock.appendChild(playerEl);
 }

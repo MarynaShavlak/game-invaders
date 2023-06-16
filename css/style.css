@@ -21,7 +21,7 @@ html {
     
 }
 
-.start-game {
+.start-game, .end-game {
     display: flex;
     flex-direction: column;
     justify-content: space-between;   
@@ -33,7 +33,7 @@ html {
     margin: 0 auto;
 }
 
-.start-game p {
+.start-game p, .end-game p {
     font-weight: 900;
     font-size: 30px;
     text-align: center;
@@ -196,7 +196,7 @@ html {
 
 
 /* CSS */
-.start-button {
+.btn {
     margin: 0 auto;
     align-items: center;
     justify-content: center;
@@ -221,12 +221,12 @@ html {
     cursor: pointer;
 }
 
-.start-button:active,
-.start-button:hover {
+.btn:active,
+.btn:hover {
     outline: 0;
 }
 
-.start-button span {
+.btn span {
     background-color: rgb(5, 6, 45);
     padding: 7px 40px;
     border-radius: 6px;
@@ -238,7 +238,7 @@ html {
     justify-content: center;
 }
 
-.start-button:hover span {
+.btn:hover span {
     background: none;
 }
 .menu {
@@ -266,3 +266,10 @@ html {
 .hidden {
     display: none;
 }
+.end-game {align-items: center;}
+.end-game svg {
+    width: 120px;
+    height: 120px;
+    fill: #AF40FF;
+}
+

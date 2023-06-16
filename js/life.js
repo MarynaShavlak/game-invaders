@@ -1,4 +1,5 @@
 let lifes = 5;
+let isGameOver = false;
 const lifesList = document.querySelector('.lifesList');
 
 function showLifes() {
@@ -11,6 +12,6 @@ function decreaseLifesQuantity() {
   if (!lifeItem) return;
   lifeItem.remove();
   if (lifes <= 0) {
-    console.log('end game');
+    endGame();
   }
 }
