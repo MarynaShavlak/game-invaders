@@ -4,7 +4,9 @@ const btnRestartGame = document.querySelector('.restart-button');
 btnStartGame.onclick = onStartGame;
 btnRestartGame.onclick = onRestartGame;
 
-createPlanet();
+const timeoutPlanet = getRandomTimeout();
+setTimeout(createPlanet, timeoutPlanet);
+
 function onStartGame() {
   if (selectedSkinClass) {
     startGameBlock.style.display = 'none';
@@ -12,6 +14,8 @@ function onStartGame() {
     createEnemy();
     createEnemy();
     createEnemy();
+    const timeoutLife = getRandomTimeout();
+    setTimeout(createAdditionalLife, timeoutLife);
     setBackgroundSound();
     showLifes();
     showLPlayerResultsBlock();

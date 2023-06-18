@@ -346,3 +346,15 @@ align-items: center;
     background: url(../images/planet3.png);
     background-size: contain;
 }
+
+.additional-life {
+    position: absolute;
+    top: -150px;
+    left: calc(50% - 15px);
+    transition: all 300ms ease-out;
+    z-index: 99;
+    width: 30px;
+    height: 30px;
+    background: url(../images/life.png);
+    background-size: contain;
+}

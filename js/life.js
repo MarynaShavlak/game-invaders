@@ -15,3 +15,19 @@ function decreaseLifesQuantity() {
     endGame();
   }
 }
+
+function createLifeElement() {
+  const life = document.createElement('div');
+  life.className = 'additional-life';
+  return life;
+}
+
+function createAdditionalLife() {
+  const life = createLifeElement();
+  console.log('life : ', life);
+  setTimeout(() => {
+    setRandomPosition(life);
+  }, 100);
+  gameElementsBlock.appendChild(life);
+  startItemMovement(life);
+}
