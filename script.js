@@ -20,9 +20,11 @@ const winGameBlock = document.querySelector('.win-game');
 const firstSkin = document.querySelector('.skin1');
 const secondSkin = document.querySelector('.skin2');
 const thirdSkin = document.querySelector('.skin3');
+const gameFieldWidth = document.querySelector('body').offsetWidth;
+const gameFieldHeight = document.querySelector('body').offsetHeight;
 
 let deathEnemiesQuantity = 0;
-let goal = 60;
+let goal = 150;
 let enemySpeed = 10;
 
 firstSkin.onclick = onSkinClick;
@@ -38,12 +40,6 @@ function onSkinClick(e) {
   thirdSkin.classList.remove('active');
   selectedSkin.classList.add('active');
 }
-
-function randomCoordinate(min, max) {
-  let rand = min + Math.random() * (max + 1 - min);
-  return Math.floor(rand);
-}
-
 function createTargetToHit(className) {
   if (isGameOver) return;
   const gameFieldWidth = document.querySelector('body').offsetWidth;
@@ -93,20 +89,9 @@ function isTargetHit(bulletEl, targetType) {
     let target = targetsList[i];
     let isTargetExist = target && !target.classList.contains('boom');
     if (isTargetExist) {
-      let top =
-        bulletEl.offsetTop > target.offsetTop &&
-        bulletEl.offsetTop < target.offsetTop + target.offsetHeight;
-      let left =
-        bulletEl.offsetLeft > target.offsetLeft &&
-        bulletEl.offsetLeft < target.offsetLeft + target.offsetWidth;
-      if (top && left) {
-        target.className = targetType + ' boom';
-        removeTargetToHit(target);
-        setBoomSound();
-        updatePlayerResultsAndEnemySpeed();
-        if (deathEnemiesQuantity === goal) {
-          winGame();
-        }
+      let isHit = isBulletHitTarget(bulletEl, target);
+      if (isHit) {
+        handleTargetHit(target, targetType);
         return true;
       }
     }
@@ -114,6 +99,24 @@ function isTargetHit(bulletEl, targetType) {
   return false;
 }
 
+function isBulletHitTarget(bulletEl, target) {
+  let top =
+    bulletEl.offsetTop > target.offsetTop &&
+    bulletEl.offsetTop < target.offsetTop + target.offsetHeight;
+  let left =
+    bulletEl.offsetLeft > target.offsetLeft &&
+    bulletEl.offsetLeft < target.offsetLeft + target.offsetWidth;
+  return top && left;
+}
+function handleTargetHit(target, targetType) {
+  target.className = targetType + ' boom';
+  removeTargetToHit(target);
+  setBoomSound();
+  updatePlayerResultsAndEnemySpeed();
+  if (deathEnemiesQuantity === goal) {
+    winGame();
+  }
+}
 function createNewTarget() {
   const randomNumber = Math.random();
   const createEntity = randomNumber < 0.5 ? createEnemy : createAsteroid;
@@ -162,25 +165,13 @@ function winGame() {
   gameElementsBlock.innerHTML = '';
 }
 
-function createPlanet() {
-  let skin = 'skin-' + randomCoordinate(1, 4);
-  const planet = document.createElement('div');
-  planet.className = 'planet ' + skin;
+function getRandomTimeout() {
+  const min = 100;
+  const max = 10000;
+  return randomCoordinate(min, max);
+}
 
-  planet.style.left =
-    randomCoordinate(
-      100,
-      document.querySelector('body').offsetWidth - planet.style.width,
-    ) + 'px';
-  gameElementsBlock.appendChild(planet);
-  let timerID = setInterval(() => {
-    planet.style.top = planet.offsetTop + 10 + 'px';
-    if (planet.offsetTop > document.querySelector('body').offsetHeight) {
-      planet.remove();
-      clearInterval(timerID);
-      setTimeout(() => {
-        createPlanet();
-      }, randomCoordinate(1000, 1000000));
-    }
-  }, 10);
+function randomCoordinate(min, max) {
+  let rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
 }
