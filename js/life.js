@@ -29,5 +29,5 @@ function createAdditionalLife() {
     setRandomPosition(life);
   }, 100);
   gameElementsBlock.appendChild(life);
-  startItemMovement(life);
+  // startItemMovement(life);
 }
