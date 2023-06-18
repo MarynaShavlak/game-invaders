@@ -22,6 +22,7 @@ html {
 }
 
 .start-game, .end-game {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;   
@@ -31,6 +32,7 @@ html {
     background-color: #fff;
     border-radius: 10px;
     margin: 0 auto;
+    z-index: 3;
 }
 
 .start-game p, .end-game p {
@@ -67,6 +69,7 @@ html {
     transition: all 300ms ease-out;
     background-position: center;
     background-repeat: no-repeat;
+    z-index: 99;
 }
 
 .skinsList {
@@ -126,6 +129,7 @@ html {
     border-radius: 6px/10px;
     box-shadow: 0 0 10px, 0 0  2px inset;
     animation : glow 1500ms  linear infinite;
+    z-index: 3;
 }
 @keyframes glow {
     from {
@@ -151,6 +155,7 @@ html {
     height: 150px;
     background-size: contain;
     transition: all 300ms ease-out;
+    z-index: 99;
 }
 
 .enemy.skin1 {
@@ -176,6 +181,7 @@ html {
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     background-size: contain;
+    z-index: 99;
 }
 
 .asteroid.boom {
@@ -242,9 +248,11 @@ html {
     background: none;
 }
 .menu {
+    position: relative;
     display: flex;
     justify-content: space-between;
     padding: 0 25px;
+    z-index: 3;
 }
 .menu .sounds svg {
     width: 50px;
@@ -274,6 +282,12 @@ html {
 }
 
 .planet {
+    position: absolute;
+    top: -500px;
+    left: 30px;
+    transition: all 300ms ease-out;
+    z-index: 1;
+    
 
 }
 
@@ -281,19 +295,23 @@ html {
     width: 500px;
     height: 500px;
     background: url(../images/planet1.png);
+    background-size: contain;
 }
 .planet.skin-2 {
     width: 300px;
     height: 300px;
     background: url(../images/planet2.png);
+    background-size: contain;
 }
 .planet.skin-3 {
     width: 450px;
     height: 450px;
-    background: url(../images/planet3.png);
+    background: url(../images/death-star.png);
+    background-size: contain;
 }
 .planet.skin-4 {
     width: 130px;
     height: 130px;
-    background: url(../images/planet4.png);
+    background: url(../images/planet3.png);
+    background-size: contain;
 }

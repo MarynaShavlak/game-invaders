@@ -20,6 +20,9 @@ const firstSkin = document.querySelector('.skin1');
 const secondSkin = document.querySelector('.skin2');
 const thirdSkin = document.querySelector('.skin3');
 
+let deathEnemiesQuantity = 0;
+let ruinedAsteroidsQuantity = 0;
+
 firstSkin.onclick = onSkinClick;
 secondSkin.onclick = onSkinClick;
 thirdSkin.onclick = onSkinClick;
@@ -98,6 +101,9 @@ function isTargetHit(bulletEl, targetType) {
         target.className = targetType + ' boom';
         removeTargetToHit(target);
         setBoomSound();
+        deathEnemiesQuantity += 1;
+        console.log('deathEnemiesQuantity: ', deathEnemiesQuantity);
+
         return true;
       }
     }
@@ -107,10 +113,13 @@ function isTargetHit(bulletEl, targetType) {
 
 function createNewTarget() {
   const randomNumber = Math.random();
-  if (randomNumber < 0.5) {
-    createEnemy();
+  console.log('randomNumber: ', randomNumber);
+  const createEntity = randomNumber < 0.5 ? createEnemy : createAsteroid;
+  if (randomNumber > 0.8) {
+    createEntity();
+    createEntity();
   } else {
-    createAsteroid();
+    createEntity();
   }
 }
 
@@ -144,3 +153,27 @@ function endGame() {
   endGameBlock.classList.remove('hidden');
   gameElementsBlock.innerHTML = '';
 }
+
+function createPlanet() {
+  let skin = 'skin-' + randomCoordinate(1, 4);
+  const planet = document.createElement('div');
+  planet.className = 'planet ' + skin;
+
+  planet.style.left =
+    randomCoordinate(
+      100,
+      document.querySelector('body').offsetWidth - planet.style.width,
+    ) + 'px';
+  gameElementsBlock.appendChild(planet);
+  let timerID = setInterval(() => {
+    planet.style.top = planet.offsetTop + 10 + 'px';
+    if (planet.offsetTop > document.querySelector('body').offsetHeight) {
+      planet.remove();
+      clearInterval(timerID);
+      setTimeout(() => {
+        createPlanet();
+      }, randomCoordinate(1000, 1000000));
+    }
+  }, 10);
+}
+createPlanet();

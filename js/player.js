@@ -30,8 +30,8 @@ function moveRight() {
 function makeShot() {
   let bulletEl = document.createElement('div');
   bulletEl.classList.add('bullet');
-  bulletEl.style.top = player.offsetTop + 'px';
-  bulletEl.style.left = player.offsetLeft + player.offsetWidth / 2 + 'px';
+  bulletEl.style.top = playerEl.offsetTop + 'px';
+  bulletEl.style.left = playerEl.offsetLeft + playerEl.offsetWidth / 2 + 'px';
   gameElementsBlock.appendChild(bulletEl);
   setBlasterSound();
   let timerID = setInterval(() => {
