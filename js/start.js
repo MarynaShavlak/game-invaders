@@ -4,15 +4,17 @@ const btnRestartGame = document.querySelector('.restart-button');
 btnStartGame.onclick = onStartGame;
 btnRestartGame.onclick = onRestartGame;
 
+createPlanet();
 function onStartGame() {
   if (selectedSkinClass) {
     startGameBlock.style.display = 'none';
     createPlayer(selectedSkinClass);
     createEnemy();
-    // createEnemy();
-    // createEnemy();
+    createEnemy();
+    createEnemy();
     setBackgroundSound();
     showLifes();
+    showLPlayerResultsBlock();
   } else {
     alert('Please, chose your ship to start the game');
   }

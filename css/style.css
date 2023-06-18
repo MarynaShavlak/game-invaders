@@ -21,7 +21,13 @@ html {
     
 }
 
-.start-game, .end-game {
+.player-info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.start-game, .end-game, .win-game {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -35,6 +41,10 @@ html {
     z-index: 3;
 }
 
+
+.win-game {
+align-items: center;
+}
 .start-game p, .end-game p {
     font-weight: 900;
     font-size: 30px;
@@ -43,6 +53,27 @@ html {
     font-family: monospace;
     color: #5B42F3;
 }
+
+
+.win-game p {
+    font-weight: 900;
+    font-size: 60px;
+    text-align: center;
+    margin: 0;
+    font-family: monospace;
+    color: #5B42F3;
+}
+
+
+.player-results {
+    font-weight: 900;
+    font-size: 30px;
+    margin: 0;
+    font-family: monospace;
+    color: #5B42F3;
+}
+
+
 
 
  img {

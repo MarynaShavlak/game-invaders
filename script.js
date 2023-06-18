@@ -16,12 +16,14 @@
 
 const gameElementsBlock = document.querySelector('.game-elements');
 const endGameBlock = document.querySelector('.end-game');
+const winGameBlock = document.querySelector('.win-game');
 const firstSkin = document.querySelector('.skin1');
 const secondSkin = document.querySelector('.skin2');
 const thirdSkin = document.querySelector('.skin3');
 
 let deathEnemiesQuantity = 0;
-let ruinedAsteroidsQuantity = 0;
+let goal = 60;
+let enemySpeed = 10;
 
 firstSkin.onclick = onSkinClick;
 secondSkin.onclick = onSkinClick;
@@ -56,7 +58,7 @@ function createTargetToHit(className) {
 function moveTargetToHit(target) {
   if (!target) return;
   let timerID = setInterval(() => {
-    target.style.top = target.offsetTop + 30 + 'px';
+    target.style.top = target.offsetTop + enemySpeed + 'px';
     const isTargetOutField =
       target.offsetTop > document.querySelector('body').offsetHeight;
 
@@ -101,9 +103,10 @@ function isTargetHit(bulletEl, targetType) {
         target.className = targetType + ' boom';
         removeTargetToHit(target);
         setBoomSound();
-        deathEnemiesQuantity += 1;
-        console.log('deathEnemiesQuantity: ', deathEnemiesQuantity);
-
+        updatePlayerResultsAndEnemySpeed();
+        if (deathEnemiesQuantity === goal) {
+          winGame();
+        }
         return true;
       }
     }
@@ -113,7 +116,6 @@ function isTargetHit(bulletEl, targetType) {
 
 function createNewTarget() {
   const randomNumber = Math.random();
-  console.log('randomNumber: ', randomNumber);
   const createEntity = randomNumber < 0.5 ? createEnemy : createAsteroid;
   if (randomNumber > 0.8) {
     createEntity();
@@ -154,6 +156,12 @@ function endGame() {
   gameElementsBlock.innerHTML = '';
 }
 
+function winGame() {
+  isGameOver = true;
+  winGameBlock.classList.remove('hidden');
+  gameElementsBlock.innerHTML = '';
+}
+
 function createPlanet() {
   let skin = 'skin-' + randomCoordinate(1, 4);
   const planet = document.createElement('div');
@@ -176,4 +184,3 @@ function createPlanet() {
     }
   }, 10);
 }
-createPlanet();

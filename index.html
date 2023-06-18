@@ -12,13 +12,24 @@
 
     <div id="app">
       <div class="menu">
-        <ul class="lifesList hidden">
-          <li class="life-item"><img src="images/life.png" alt="life" /></li>
-          <li class="life-item"><img src="images/life.png" alt="life" /></li>
-          <li class="life-item"><img src="images/life.png" alt="life" /></li>
-          <li class="life-item"><img src="images/life.png" alt="life" /></li>
-          <li class="life-item"><img src="images/life.png" alt="life" /></li>
-        </ul>
+        <div class="player-info">
+          <ul class="lifesList hidden">
+            <li class="life-item"><img src="images/life.png" alt="life" /></li>
+            <li class="life-item"><img src="images/life.png" alt="life" /></li>
+            <li class="life-item"><img src="images/life.png" alt="life" /></li>
+            <li class="life-item"><img src="images/life.png" alt="life" /></li>
+            <li class="life-item"><img src="images/life.png" alt="life" /></li>
+          </ul>
+          <div class="player-results hidden">
+            <div class="levelBlock">
+              <span class="label">Level: </span><span class="level">1</span>
+            </div>
+            <div class="deadBlock">
+              <span class="label">Dead: </span><span class="dead">0</span>
+            </div>
+          </div>
+        </div>
+
         <div class="sounds">
           <div class="soundOn hidden">
             <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -111,9 +122,13 @@
           <span class="text">Restart Game</span>
         </button>
       </div>
-      <div class="game-elements">
-        <!-- <div class="planet skin1"></div> -->
+      <div class="win-game hidden">
+        <p>You win this war!</p>
+        <button class="restart-button btn" role="button">
+          <span class="text">Restart Game</span>
+        </button>
       </div>
+      <div class="game-elements"></div>
     </div>
     <script src="script.js"></script>
     <script src="js/player.js"></script>
@@ -121,6 +136,7 @@
     <script src="js/enemy.js"></script>
     <script src="js/asteroid.js"></script>
     <script src="js/life.js"></script>
+    <script src="js/level.js"></script>
     <script src="js/start.js"></script>
   </body>
 </html>
