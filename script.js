@@ -86,11 +86,14 @@ function isTargetHit(bulletEl, targetType) {
   const targetsList = document.querySelectorAll('.' + targetType);
   for (let i = 0; i < targetsList.length; i++) {
     let target = targetsList[i];
+    const classTarget = target.className.split(' ')[1];
+
     let isTargetExist = target && !target.classList.contains('boom');
     if (isTargetExist) {
       let isHit = isBulletHitTarget(bulletEl, target);
+
       if (isHit) {
-        handleTargetHit(target, targetType);
+        handleTargetHit(target, targetType, classTarget);
         return true;
       }
     }
@@ -107,8 +110,16 @@ function isBulletHitTarget(bulletEl, target) {
     bulletEl.offsetLeft < target.offsetLeft + target.offsetWidth;
   return top && left;
 }
-function handleTargetHit(target, targetType) {
-  target.className = targetType + ' boom';
+function handleTargetHit(target, targetType, classTarget) {
+  const suffixLookup = {
+    skin1: '',
+    skin2: '-2',
+    skin3: '-3',
+  };
+
+  const suffix = suffixLookup[classTarget] || '';
+  target.className = targetType + ' boom' + suffix;
+
   removeTargetToHit(target);
   setBoomSound();
   updatePlayerResultsAndEnemySpeed();

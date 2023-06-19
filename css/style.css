@@ -251,6 +251,16 @@ align-items: center;
     background-repeat: no-repeat;
     background-position: center;
 }
+.enemy.boom-2 {
+    background-image: url(../images/boom-2.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.enemy.boom-3 {
+    background-image: url(../images/boom-3.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
 .asteroid {
     position: absolute;

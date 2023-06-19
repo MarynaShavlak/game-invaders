@@ -1,7 +1,6 @@
 function createEnemy() {
   let enemyEl;
   const randomNumber = Math.random();
-  console.log('randomNumber: ', randomNumber);
   if (randomNumber > 0.8) {
     enemyEl = createTargetToHit('enemy skin1');
   } else if (randomNumber < 0.5) {

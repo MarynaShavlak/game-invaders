@@ -44,7 +44,7 @@ function createBullet(className, topOffset, leftOffset) {
   return bulletEl;
 }
 
-function handleBullet(bulletEl, target) {
+function handleBullet(bulletEl) {
   const isEnemyKilled = isTargetHit(bulletEl, 'enemy');
   const isAsteroidRuined = isTargetHit(bulletEl, 'asteroid');
   const isAdditionalLifeTaken = isAdditionalLifeHit(bulletEl);

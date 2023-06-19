@@ -13,8 +13,8 @@ function onStartGame() {
     startGameBlock.style.display = 'none';
     createPlayer(selectedSkinClass);
     createEnemy();
-    createEnemy();
-    createEnemy();
+    // createEnemy();
+    // createEnemy();
     const timeoutLife = getRandomTimeout();
     setTimeout(createAdditionalLife, timeoutLife);
     setBackgroundSound();
