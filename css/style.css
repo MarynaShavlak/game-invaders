@@ -159,10 +159,9 @@ align-items: center;
     background-color: #fff;
     border-radius: 6px/10px;
     box-shadow: 0 0 10px, 0 0  2px inset;
-    animation : glow 1500ms  linear infinite;
     z-index: 3;
 }
-@keyframes glow {
+@keyframes glowLime {
     from {
         color: lime;
         box-shadow: 0 0 9px lime;
@@ -176,7 +175,45 @@ align-items: center;
         box-shadow: 0 0 9px lime;
     }
 }
+@keyframes glowPink {
+    from {
+        color: rgb(226, 66, 226);
+        box-shadow: 0 0 9px rgb(226, 66, 226);
+    }
+    50% {
+        color: rgb(226, 66, 226);
+        box-shadow: 0 0 18px rgb(226, 66, 226);
+    }
+    to {
+        color: rgb(226, 66, 226);
+        box-shadow: 0 0 9px rgb(226, 66, 226);
+    }
+}
+@keyframes glowRed {
+    from {
+        color: red;
+        box-shadow: 0 0 9px red;
+    }
+    50% {
+        color: red;
+        box-shadow: 0 0 18px red;
+    }
+    to {
+        color: red;
+        box-shadow: 0 0 9px red;
+    }
+}
 
+
+.bullet-1 {
+    animation: glowLime 1500ms linear infinite;
+}
+.bullet-2 {
+    animation: glowPink 1500ms linear infinite;
+}
+.bullet-3 {
+    animation: glowRed 1500ms linear infinite;
+}
 
 .enemy {
     position: absolute;

@@ -24,7 +24,7 @@ const gameFieldWidth = document.querySelector('body').offsetWidth;
 const gameFieldHeight = document.querySelector('body').offsetHeight;
 
 let deathEnemiesQuantity = 0;
-let goal = 150;
+let goal = 50;
 let enemySpeed = 10;
 
 firstSkin.onclick = onSkinClick;

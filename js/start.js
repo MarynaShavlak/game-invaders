@@ -11,9 +11,9 @@ function onStartGame() {
   if (selectedSkinClass) {
     startGameBlock.style.display = 'none';
     createPlayer(selectedSkinClass);
-    // createEnemy();
-    // createEnemy();
-    // createEnemy();
+    createEnemy();
+    createEnemy();
+    createEnemy();
     const timeoutLife = getRandomTimeout();
     setTimeout(createAdditionalLife, timeoutLife);
     setBackgroundSound();
@@ -25,5 +25,6 @@ function onStartGame() {
 }
 
 function onRestartGame() {
+  console.log('restart');
   location.reload();
 }
