@@ -37,8 +37,14 @@ function makeShot() {
   let timerID = setInterval(() => {
     const isEnemyKilled = isTargetHit(bulletEl, 'enemy');
     const isAsteroidRuined = isTargetHit(bulletEl, 'asteroid');
+    const isAdditionalLifeTaken = isAdditionalLifeHit(bulletEl);
     const isBulletOutField = bulletEl.offsetTop < 0;
-    if (isEnemyKilled || isBulletOutField || isAsteroidRuined) {
+    if (
+      isEnemyKilled ||
+      isBulletOutField ||
+      isAsteroidRuined ||
+      isAdditionalLifeTaken
+    ) {
       bulletEl.remove();
       clearInterval(timerID);
     }

@@ -126,7 +126,11 @@ function createNewTarget() {
     createEntity();
   }
 }
-
+function checkIfIntersecting(element1, element2) {
+  const element1Coords = getCoordinatesAndDimensions(element1);
+  const element2Coords = getCoordinatesAndDimensions(element2);
+  return checkIfCoordinatesIntersect(element1Coords, element2Coords);
+}
 function checkIfCoordinatesIntersect(playerCoords, targetCoords) {
   const playerRight = playerCoords.x + playerCoords.width;
   const playerBottom = playerCoords.y + playerCoords.height;

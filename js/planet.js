@@ -16,7 +16,7 @@ function createPlanetElement() {
 
 function setRandomPosition(item) {
   const itemWidth = item.offsetWidth;
-  const left = randomCoordinate(100, gameFieldWidth - itemWidth);
+  const left = randomCoordinate(100, gameFieldWidth - itemWidth - 100);
   item.style.left = left + 'px';
 }
 
