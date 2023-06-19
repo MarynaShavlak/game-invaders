@@ -12,7 +12,7 @@ function increaseLevel(deathEnemiesQuantity) {
 }
 
 function increaseEnemySpeed() {
-  enemySpeed += 3;
+  enemySpeed += 2;
 }
 
 function updatePlayerResultsAndEnemySpeed() {

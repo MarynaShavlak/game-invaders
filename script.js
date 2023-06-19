@@ -55,8 +55,7 @@ function moveTargetToHit(target) {
   if (!target) return;
   let timerID = setInterval(() => {
     target.style.top = target.offsetTop + enemySpeed + 'px';
-    const isTargetOutField =
-      target.offsetTop > document.querySelector('body').offsetHeight;
+    const isTargetOutField = target.offsetTop > gameFieldHeight;
 
     const targetCoords = getCoordinatesAndDimensions(target);
     const playerCoords = getCoordinatesAndDimensions(playerEl);
