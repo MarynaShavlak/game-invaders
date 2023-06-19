@@ -73,6 +73,7 @@ function handleLifeRemoval(life) {
     }
   }, timeoutLife);
 }
+
 function isAdditionalLifeHit(bulletEl) {
   const lifesList = document.querySelectorAll('.additional-life');
   for (let i = 0; i < lifesList.length; i++) {

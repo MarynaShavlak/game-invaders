@@ -48,12 +48,14 @@ function handleBullet(bulletEl) {
   const isEnemyKilled = isTargetHit(bulletEl, 'enemy');
   const isAsteroidRuined = isTargetHit(bulletEl, 'asteroid');
   const isAdditionalLifeTaken = isAdditionalLifeHit(bulletEl);
+  const isBombRuined = isBombHit(bulletEl);
   const isBulletOutField = bulletEl.offsetTop < 0;
 
   if (
     isEnemyKilled ||
     isBulletOutField ||
     isAsteroidRuined ||
+    isBombRuined ||
     isAdditionalLifeTaken
   ) {
     bulletEl.remove();

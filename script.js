@@ -140,7 +140,7 @@ function createNewTarget() {
 function checkIfIntersecting(element1, element2) {
   const element1Coords = getCoordinatesAndDimensions(element1);
   const element2Coords = getCoordinatesAndDimensions(element2);
-  return checkIfCoordinatesIntersect(element1Coords, element2Coords);
+  return checkIfCoordinatesIntersect(element2Coords, element1Coords);
 }
 function checkIfCoordinatesIntersect(playerCoords, targetCoords) {
   const playerRight = playerCoords.x + playerCoords.width;

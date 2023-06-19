@@ -12,11 +12,11 @@ function onStartGame() {
   if (selectedSkinClass) {
     startGameBlock.style.display = 'none';
     createPlayer(selectedSkinClass);
-    createEnemy();
-    createEnemy();
+    // createEnemy();
+    // createEnemy();
 
-    const timeoutLife = getRandomTimeout(300, 10000);
-    setTimeout(createAdditionalLife, timeoutLife);
+    // const timeoutLife = getRandomTimeout(300, 10000);
+    // setTimeout(createAdditionalLife, timeoutLife);
     const timeoutBomb = getRandomTimeout(100, 1000);
     setTimeout(createBomb, timeoutBomb);
     setBackgroundSound();

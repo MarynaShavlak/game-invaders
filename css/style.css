@@ -421,13 +421,14 @@ align-items: center;
 }
 .bomb {
     position: absolute;
-    top: -100px;
-    transition: all 300ms ease-out;
-    z-index: 99;
+        top: -500px;
+        transition: all 300ms ease-out;
+        z-index: 99;
     width: 80px;
     height: 80px;
     background: url(../images/bomb.gif);
     background-size: contain;
     background-repeat: no-repeat;
 }
+
 
