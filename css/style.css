@@ -175,18 +175,18 @@ align-items: center;
         box-shadow: 0 0 9px lime;
     }
 }
-@keyframes glowPink {
+@keyframes glowBlue {
     from {
-        color: rgb(226, 66, 226);
-        box-shadow: 0 0 9px rgb(226, 66, 226);
+        color: blue;
+        box-shadow: 0 0 9px blue;
     }
     50% {
-        color: rgb(226, 66, 226);
-        box-shadow: 0 0 18px rgb(226, 66, 226);
+        color: blue;
+        box-shadow: 0 0 18px blue;
     }
     to {
-        color: rgb(226, 66, 226);
-        box-shadow: 0 0 9px rgb(226, 66, 226);
+        color: blue;
+        box-shadow: 0 0 9px blue;
     }
 }
 @keyframes glowRed {
@@ -209,7 +209,8 @@ align-items: center;
     animation: glowLime 1500ms linear infinite;
 }
 .bullet-2 {
-    animation: glowPink 1500ms linear infinite;
+    background-color: rgb(172, 172, 224);
+    animation: glowBlue 1500ms linear infinite;
 }
 .bullet-3 {
     animation: glowRed 1500ms linear infinite;

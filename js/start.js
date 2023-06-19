@@ -1,9 +1,10 @@
 const startGameBlock = document.querySelector('.start-game');
 const btnStartGame = document.querySelector('.start-button');
 const btnRestartGame = document.querySelector('.restart-button');
+const btnStartNewGame = document.querySelector('.start-new-button');
 btnStartGame.onclick = onStartGame;
 btnRestartGame.onclick = onRestartGame;
-
+btnStartNewGame.onclick = onRestartGame;
 const timeoutPlanet = getRandomTimeout();
 setTimeout(createPlanet, timeoutPlanet);
 
@@ -25,6 +26,5 @@ function onStartGame() {
 }
 
 function onRestartGame() {
-  console.log('restart');
   location.reload();
 }
