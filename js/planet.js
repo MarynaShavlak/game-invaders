@@ -27,7 +27,7 @@ function startItemMovement(planet) {
     if (top > gameFieldHeight) {
       clearInterval(timerID);
       planet.remove();
-      const timeout = getRandomTimeout();
+      const timeout = getRandomTimeout(100, 10000);
       setTimeout(createPlanet, timeout);
     }
   }, 10);

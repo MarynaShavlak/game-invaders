@@ -418,6 +418,16 @@ align-items: center;
     height: 50px;
     background: url(../images/life.png);
     background-size: contain;
-    transform: scale(1);
+}
+.bomb {
+    position: absolute;
+    top: -100px;
+    transition: all 300ms ease-out;
+    z-index: 99;
+    width: 80px;
+    height: 80px;
+    background: url(../images/bomb.gif);
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 

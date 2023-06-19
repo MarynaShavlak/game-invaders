@@ -24,7 +24,7 @@ const gameFieldWidth = document.querySelector('body').offsetWidth;
 const gameFieldHeight = document.querySelector('body').offsetHeight;
 
 let deathEnemiesQuantity = 0;
-let goal = 50;
+let goal = 300;
 let enemySpeed = 10;
 
 firstSkin.onclick = onSkinClick;
@@ -179,9 +179,7 @@ function winGame() {
   gameElementsBlock.innerHTML = '';
 }
 
-function getRandomTimeout() {
-  const min = 100;
-  const max = 10000;
+function getRandomTimeout(min, max) {
   return randomCoordinate(min, max);
 }
 

@@ -63,7 +63,7 @@ function moveAdditionalLife(life) {
 function handleLifeRemoval(life) {
   life.remove();
   const randomNumber = Math.random();
-  const timeoutLife = getRandomTimeout();
+  const timeoutLife = getRandomTimeout(300, 10000);
   setTimeout(() => {
     if (randomNumber > 0.8) {
       createAdditionalLife();

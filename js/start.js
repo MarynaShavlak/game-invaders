@@ -5,7 +5,7 @@ const btnStartNewGame = document.querySelector('.start-new-button');
 btnStartGame.onclick = onStartGame;
 btnRestartGame.onclick = onRestartGame;
 btnStartNewGame.onclick = onRestartGame;
-const timeoutPlanet = getRandomTimeout();
+const timeoutPlanet = getRandomTimeout(100, 10000);
 setTimeout(createPlanet, timeoutPlanet);
 
 function onStartGame() {
@@ -13,10 +13,12 @@ function onStartGame() {
     startGameBlock.style.display = 'none';
     createPlayer(selectedSkinClass);
     createEnemy();
-    // createEnemy();
-    // createEnemy();
-    const timeoutLife = getRandomTimeout();
+    createEnemy();
+
+    const timeoutLife = getRandomTimeout(300, 10000);
     setTimeout(createAdditionalLife, timeoutLife);
+    const timeoutBomb = getRandomTimeout(100, 1000);
+    setTimeout(createBomb, timeoutBomb);
     setBackgroundSound();
     showLifes();
     showLPlayerResultsBlock();
