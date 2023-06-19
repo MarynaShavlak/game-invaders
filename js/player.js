@@ -66,7 +66,7 @@ function handleBullet(bulletEl, target) {
 
 function shootSkin1(top, left) {
   const bulletEl = createBullet('bullet-1', top, left);
-  setBlasterSound();
+  setBlasterSound('bullet-1');
   const timerID = setInterval(() => {
     const shouldRemoveBullet = handleBullet(bulletEl);
     if (shouldRemoveBullet) {
@@ -79,7 +79,7 @@ function shootSkin2(top, left) {
   const leftBullet = createBullet('bullet-2', top, left - 10);
   const rightBullet = createBullet('bullet-2', top, left + 10);
 
-  setBlasterSound();
+  setBlasterSound('bullet-2');
   const timerIDLeft = setInterval(() => {
     const shouldRemoveLeftBullet = handleBullet(leftBullet);
     if (shouldRemoveLeftBullet) {
@@ -100,7 +100,7 @@ function shootSkin3(top, left) {
   const rightBullet = createBullet('bullet-3', top, left + 55);
   const centerBullet = createBullet('bullet-3', top, left - 5);
 
-  setBlasterSound();
+  setBlasterSound('bullet-3');
   const timerIDLeft = setInterval(() => {
     const shouldRemoveLeftBullet = handleBullet(leftBullet);
     if (shouldRemoveLeftBullet) {

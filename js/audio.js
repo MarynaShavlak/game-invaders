@@ -11,8 +11,23 @@ function setSoundProperties(sound, volume) {
   sound.play();
 }
 
-function setBlasterSound() {
-  const blasterSound = new Audio('sound/shot.mp3');
+function setBlasterSound(bulletType) {
+  let blasterSound;
+  switch (bulletType) {
+    case 'bullet-1':
+      blasterSound = new Audio('sound/shot.mp3');
+      break;
+    case 'bullet-2':
+      blasterSound = new Audio('sound/shot-2.mp3');
+      break;
+    case 'bullet-3':
+      blasterSound = new Audio('sound/shot-3.mp3');
+      break;
+    default:
+      blasterSound = new Audio('sound/shot-1.mp3');
+      break;
+  }
+
   setSoundProperties(blasterSound, 0.1);
 }
 
