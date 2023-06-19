@@ -1,4 +1,14 @@
 function createEnemy() {
-  const enemyEl = createTargetToHit('enemy skin1');
+  let enemyEl;
+  const randomNumber = Math.random();
+  console.log('randomNumber: ', randomNumber);
+  if (randomNumber > 0.8) {
+    enemyEl = createTargetToHit('enemy skin1');
+  } else if (randomNumber < 0.5) {
+    enemyEl = createTargetToHit('enemy skin2');
+  } else {
+    enemyEl = createTargetToHit('enemy skin3');
+  }
+
   moveTargetToHit(enemyEl);
 }

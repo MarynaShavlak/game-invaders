@@ -230,6 +230,20 @@ align-items: center;
 .enemy.skin1 {
     background-image: url(../images/enemy.png);
 }
+.enemy.skin2 {
+    width: 170px;
+    height: 100px;
+    background-image: url(../images/enemy-2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.enemy.skin3 {
+    width: 170px;
+    height: 100px;
+    background-image: url(../images/enemy-1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 
 
 .enemy.boom {
