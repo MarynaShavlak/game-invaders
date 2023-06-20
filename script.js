@@ -80,7 +80,7 @@ function removeTargetToHit(target) {
     target.remove();
     if (!isBombedRuined) {
       createNewTarget();
-    } else if (killedByBombEnemies.length == 1) {
+    } else if (killedByBombEnemies.length <= 1) {
       createNewTarget();
     }
   }, 800);

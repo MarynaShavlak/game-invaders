@@ -50,6 +50,20 @@ function handleBombRemoval(bomb) {
   }, timeoutBomb);
 }
 
+function createBombTerritory(x, y) {
+  const ter = document.createElement('div');
+  ter.className = 'bomb-territory';
+  ter.style.position = 'absolute';
+  ter.style.backgroundColor = 'red';
+  ter.style.width = '300px';
+  ter.style.height = '300px';
+  ter.style.left = x - 110 + 'px';
+  ter.style.top = y - 110 + 'px';
+  ter.style.zIndex = 3;
+
+  return ter;
+}
+
 function isBombHit(bulletEl) {
   const bombsList = document.querySelectorAll('.bomb');
   let ter;
@@ -60,15 +74,7 @@ function isBombHit(bulletEl) {
       let isHit = isBulletHitTarget(bulletEl, bomb);
       if (isHit) {
         const { x, y, width, height } = getCoordinatesAndDimensions(bomb);
-        ter = document.createElement('div');
-        ter.className = 'bomb-territory';
-        ter.style.position = 'absolute';
-        ter.style.backgroundColor = 'red';
-        ter.style.width = '300px';
-        ter.style.height = '300px';
-        ter.style.left = x - 110 + 'px';
-        ter.style.top = y - 110 + 'px';
-        ter.style.zIndex = 3;
+        ter = createBombTerritory(x, y);
         gameElementsBlock.appendChild(ter);
 
         let enemiesAndLifes = [];
@@ -92,7 +98,7 @@ function isBombHit(bulletEl) {
           const isEnemy = el.classList.contains('enemy');
           const isAsteroid = el.classList.contains('asteroid');
           const isBoom = el.classList.contains('boom');
-          console.log('isBoom : ', isBoom);
+          // console.log('isBoom : ', isBoom);
           if ((isEnemy || isAsteroid) && !isBoom) {
             killedByBombEnemies.push(el);
           }
