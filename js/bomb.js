@@ -94,11 +94,29 @@ function getEnemiesAndLifesToBeBombed(ter, enemiesAndLifes) {
   return closestEnemies;
 }
 
+function getKilledByBombEnemies(enemiesAndLifesToBeBombed) {
+  let killedByBombEnemies = [];
+
+  for (let i = 0; i < enemiesAndLifesToBeBombed.length; i++) {
+    const el = enemiesAndLifesToBeBombed[i];
+    const isEnemy = el.classList.contains('enemy');
+    const isAsteroid = el.classList.contains('asteroid');
+    const isBoom = el.classList.contains('boom');
+
+    if ((isEnemy || isAsteroid) && !isBoom) {
+      killedByBombEnemies.push(el);
+    }
+  }
+
+  return killedByBombEnemies;
+}
+
 function isBombHit(bulletEl) {
   const bombsList = document.querySelectorAll('.bomb');
   let ter;
   let allExistingEnemiesAndLifes = [];
   let enemiesAndLifesToBeBombed = [];
+  let killedByBombEnemies = [];
   for (let i = 0; i < bombsList.length; i++) {
     let bomb = bombsList[i];
 
@@ -113,32 +131,33 @@ function isBombHit(bulletEl) {
           ter,
           enemiesAndLifes,
         );
+        killedByBombEnemies = getKilledByBombEnemies(enemiesAndLifesToBeBombed);
 
-        const innerElements = gameElementsBlock.children;
-        for (let i = 0; i < innerElements.length; i++) {
-          let el = innerElements[i];
-          const isEnemy = el.classList.contains('enemy');
-          const isAsteroid = el.classList.contains('asteroid');
-          const isAdditionalLife = el.classList.contains('additional-life');
-          const isBoom = el.classList.contains('boom');
-          if ((isEnemy || isAsteroid || isAdditionalLife) && !isBoom) {
-            enemiesAndLifes.push(el);
-            const isIntersecting = checkIfIntersecting(ter, el);
-            if (isIntersecting) {
-              closestEnemies.push(el);
-            }
-          }
-        }
-        for (let i = 0; i < closestEnemies.length; i++) {
-          const el = closestEnemies[i];
-          const isEnemy = el.classList.contains('enemy');
-          const isAsteroid = el.classList.contains('asteroid');
-          const isBoom = el.classList.contains('boom');
-          // console.log('isBoom : ', isBoom);
-          if ((isEnemy || isAsteroid) && !isBoom) {
-            killedByBombEnemies.push(el);
-          }
-        }
+        // const innerElements = gameElementsBlock.children;
+        // for (let i = 0; i < innerElements.length; i++) {
+        //   let el = innerElements[i];
+        //   const isEnemy = el.classList.contains('enemy');
+        //   const isAsteroid = el.classList.contains('asteroid');
+        //   const isAdditionalLife = el.classList.contains('additional-life');
+        //   const isBoom = el.classList.contains('boom');
+        //   if ((isEnemy || isAsteroid || isAdditionalLife) && !isBoom) {
+        //     enemiesAndLifes.push(el);
+        //     const isIntersecting = checkIfIntersecting(ter, el);
+        //     if (isIntersecting) {
+        //       closestEnemies.push(el);
+        //     }
+        //   }
+        // }
+        // for (let i = 0; i < closestEnemies.length; i++) {
+        //   const el = closestEnemies[i];
+        //   const isEnemy = el.classList.contains('enemy');
+        //   const isAsteroid = el.classList.contains('asteroid');
+        //   const isBoom = el.classList.contains('boom');
+        //   // console.log('isBoom : ', isBoom);
+        //   if ((isEnemy || isAsteroid) && !isBoom) {
+        //     killedByBombEnemies.push(el);
+        //   }
+        // }
         console.log('killedByBombEnemies: ', killedByBombEnemies);
         ter.remove();
         isBombedRuined = true;
