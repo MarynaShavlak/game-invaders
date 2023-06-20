@@ -1,4 +1,4 @@
-let closestEnemies = [];
+// let closestEnemies = [];
 let isBombedRuined = false;
 let killedByBombEnemies = [];
 
@@ -64,20 +64,56 @@ function createBombTerritory(x, y) {
   return ter;
 }
 
+function getAllExistingEnemiesAndLifes() {
+  let enemiesAndLifes = [];
+  const innerElements = gameElementsBlock.children;
+  for (let i = 0; i < innerElements.length; i++) {
+    let el = innerElements[i];
+    const isEnemy = el.classList.contains('enemy');
+    const isAsteroid = el.classList.contains('asteroid');
+    const isAdditionalLife = el.classList.contains('additional-life');
+    const isBoom = el.classList.contains('boom');
+    if ((isEnemy || isAsteroid || isAdditionalLife) && !isBoom) {
+      enemiesAndLifes.push(el);
+    }
+  }
+  return enemiesAndLifes;
+}
+
+function getEnemiesAndLifesToBeBombed(ter, enemiesAndLifes) {
+  let closestEnemies = [];
+  for (let i = 0; i < enemiesAndLifes.length; i++) {
+    const el = enemiesAndLifes[i];
+    const isIntersecting = checkIfIntersecting(ter, el);
+
+    if (isIntersecting) {
+      closestEnemies.push(el);
+    }
+  }
+
+  return closestEnemies;
+}
+
 function isBombHit(bulletEl) {
   const bombsList = document.querySelectorAll('.bomb');
   let ter;
+  let allExistingEnemiesAndLifes = [];
+  let enemiesAndLifesToBeBombed = [];
   for (let i = 0; i < bombsList.length; i++) {
     let bomb = bombsList[i];
 
     if (bomb) {
       let isHit = isBulletHitTarget(bulletEl, bomb);
       if (isHit) {
-        const { x, y, width, height } = getCoordinatesAndDimensions(bomb);
+        const { x, y } = getCoordinatesAndDimensions(bomb);
         ter = createBombTerritory(x, y);
         gameElementsBlock.appendChild(ter);
+        allExistingEnemiesAndLifes = getAllExistingEnemiesAndLifes();
+        enemiesAndLifesToBeBombed = getEnemiesAndLifesToBeBombed(
+          ter,
+          enemiesAndLifes,
+        );
 
-        let enemiesAndLifes = [];
         const innerElements = gameElementsBlock.children;
         for (let i = 0; i < innerElements.length; i++) {
           let el = innerElements[i];
