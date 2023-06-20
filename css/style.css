@@ -283,6 +283,7 @@ align-items: center;
     background-position: center;
 }
 
+
 @keyframes spin {
     100% {
         transform: rotate(360deg);
@@ -421,9 +422,9 @@ align-items: center;
 }
 .bomb {
     position: absolute;
-        top: -500px;
-        transition: all 300ms ease-out;
-        z-index: 99;
+    top: -500px;
+    transition: all 300ms ease-out;
+    z-index: 99;
     width: 80px;
     height: 80px;
     background: url(../images/bomb.gif);
@@ -431,4 +432,8 @@ align-items: center;
     background-repeat: no-repeat;
 }
 
-
+.bomb.explosion {
+    background-image: url(../images/bomb-boom.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+}

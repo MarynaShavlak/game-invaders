@@ -24,7 +24,7 @@ const gameFieldWidth = document.querySelector('body').offsetWidth;
 const gameFieldHeight = document.querySelector('body').offsetHeight;
 
 let deathEnemiesQuantity = 0;
-let goal = 200;
+let goal = 300;
 let enemySpeed = 10;
 
 firstSkin.onclick = onSkinClick;
@@ -43,9 +43,14 @@ function onSkinClick(e) {
 function createTargetToHit(className) {
   if (isGameOver) return;
   const gameFieldWidth = document.querySelector('body').offsetWidth;
+  const top = randomCoordinate(-300, -150);
   const left = randomCoordinate(150, gameFieldWidth - 150);
   const targetToHitEl = document.createElement('div');
   targetToHitEl.className = className;
+  if (deathEnemiesQuantity > 50) {
+    targetToHitEl.style.top = randomCoordinate(-500, -300) + 'px';
+  }
+  targetToHitEl.style.top = top + 'px';
   targetToHitEl.style.left = left + 'px';
   gameElementsBlock.appendChild(targetToHitEl);
   return targetToHitEl;

@@ -9,6 +9,7 @@ function createBombElement() {
 
 function createBomb() {
   if (isGameOver) return;
+  console.log('create bomb');
   const bomb = createBombElement();
   setTimeout(() => {
     setRandomPosition(bomb);
@@ -36,16 +37,11 @@ function moveBomb(bomb) {
 }
 
 function handleBombRemoval(bomb) {
-  bomb.remove();
-  const randomNumber = Math.random();
-  const timeoutBomb = getRandomTimeout(100, 2000);
+  setBoomSound();
+  const timeoutBomb = getRandomTimeout(1000, 5000);
   setTimeout(() => {
-    if (randomNumber > 0.4) {
-      createBomb();
-      createBomb();
-    } else {
-      createBomb();
-    }
+    bomb.remove();
+    createBomb();
   }, timeoutBomb);
 }
 
@@ -70,9 +66,10 @@ function getAllExistingEnemiesAndLifes() {
     let el = innerElements[i];
     const isEnemy = el.classList.contains('enemy');
     const isAsteroid = el.classList.contains('asteroid');
+    const isBomb = el.classList.contains('bomb');
     const isAdditionalLife = el.classList.contains('additional-life');
     const isBoom = el.classList.contains('boom');
-    if ((isEnemy || isAsteroid || isAdditionalLife) && !isBoom) {
+    if ((isEnemy || isAsteroid || isAdditionalLife || isBomb) && !isBoom) {
       enemiesAndLifes.push(el);
     }
   }
@@ -100,9 +97,10 @@ function getKilledByBombEnemies(enemiesAndLifesToBeBombed) {
     const el = enemiesAndLifesToBeBombed[i];
     const isEnemy = el.classList.contains('enemy');
     const isAsteroid = el.classList.contains('asteroid');
+    const isBomb = el.classList.contains('bomb');
     const isBoom = el.classList.contains('boom');
 
-    if ((isEnemy || isAsteroid) && !isBoom) {
+    if ((isEnemy || isAsteroid || isBomb) && !isBoom) {
       killedByBombEnemies.push(el);
     }
   }
@@ -130,7 +128,6 @@ function isBombHit(bulletEl) {
   let ter;
   let allExistingEnemiesAndLifes = [];
   let enemiesAndLifesToBeBombed = [];
-  let killedByBombEnemies = [];
   for (let i = 0; i < bombsList.length; i++) {
     let bomb = bombsList[i];
 
@@ -145,35 +142,6 @@ function isBombHit(bulletEl) {
           ter,
           allExistingEnemiesAndLifes,
         );
-        console.log('enemiesAndLifesToBeBombed: ', enemiesAndLifesToBeBombed);
-        killedByBombEnemies = getKilledByBombEnemies(enemiesAndLifesToBeBombed);
-        console.log('killedByBombEnemies: ', killedByBombEnemies);
-
-        // const innerElements = gameElementsBlock.children;
-        // for (let i = 0; i < innerElements.length; i++) {
-        //   let el = innerElements[i];
-        //   const isEnemy = el.classList.contains('enemy');
-        //   const isAsteroid = el.classList.contains('asteroid');
-        //   const isAdditionalLife = el.classList.contains('additional-life');
-        //   const isBoom = el.classList.contains('boom');
-        //   if ((isEnemy || isAsteroid || isAdditionalLife) && !isBoom) {
-        //     enemiesAndLifes.push(el);
-        //     const isIntersecting = checkIfIntersecting(ter, el);
-        //     if (isIntersecting) {
-        //       closestEnemies.push(el);
-        //     }
-        //   }
-        // }
-        // for (let i = 0; i < closestEnemies.length; i++) {
-        //   const el = closestEnemies[i];
-        //   const isEnemy = el.classList.contains('enemy');
-        //   const isAsteroid = el.classList.contains('asteroid');
-        //   const isBoom = el.classList.contains('boom');
-        //   // console.log('isBoom : ', isBoom);
-        //   if ((isEnemy || isAsteroid) && !isBoom) {
-        //     killedByBombEnemies.push(el);
-        //   }
-        // }
         ter.remove();
         isBombedRuined = true;
         if (enemiesAndLifesToBeBombed.length) {
@@ -182,23 +150,7 @@ function isBombHit(bulletEl) {
             isBombedRuined = false;
           }, 800);
         }
-
-        // if (enemiesAndLifesToBeBombed.length) {
-        //   for (let i = 0; i < enemiesAndLifesToBeBombed.length; i++) {
-        //     const element = enemiesAndLifesToBeBombed[i];
-        //     const targetType = element.className.split(' ')[0];
-        //     const classTarget = element.className.split(' ')[1];
-        //     if (targetType === 'additional-life') {
-        //       increaseLifesQuantity();
-        //       handleLifeRemoval(element);
-        //     } else {
-        //       handleTargetHit(element, targetType, classTarget);
-        //     }
-        //   }
-        //   setTimeout(() => {
-        //     isBombedRuined = false;
-        //   }, 800);
-        // }
+        bomb.className = 'bomb explosion';
         handleBombRemoval(bomb);
 
         return true;
