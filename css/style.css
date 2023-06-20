@@ -246,7 +246,7 @@ align-items: center;
 }
 
 
-.enemy.boom {
+.enemy.boom-1 {
     background-image: url(../images/boom.gif);
     background-repeat: no-repeat;
     background-position: center;

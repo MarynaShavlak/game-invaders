@@ -24,9 +24,11 @@ function decreaseLifesQuantity() {
   }
 }
 function increaseLifesQuantity() {
-  lifes += 1;
-  const lifeItem = createNewLifeInMenu();
-  lifesList.appendChild(lifeItem);
+  if (lifes < 10) {
+    lifes += 1;
+    const lifeItem = createNewLifeInMenu();
+    lifesList.appendChild(lifeItem);
+  }
 }
 function createLifeElement() {
   const life = document.createElement('div');
@@ -65,7 +67,7 @@ function handleLifeRemoval(life) {
   const randomNumber = Math.random();
   const timeoutLife = getRandomTimeout(300, 10000);
   setTimeout(() => {
-    if (randomNumber > 0.8) {
+    if (randomNumber > 0.8 && lifes < 5) {
       createAdditionalLife();
       createAdditionalLife();
     } else {

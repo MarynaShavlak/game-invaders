@@ -78,7 +78,11 @@ function moveTargetToHit(target) {
 function removeTargetToHit(target) {
   setTimeout(() => {
     target.remove();
-    createNewTarget();
+    if (!isBombedRuined) {
+      createNewTarget();
+    } else if (killedByBombEnemies.length == 1) {
+      createNewTarget();
+    }
   }, 800);
 }
 
@@ -111,14 +115,17 @@ function isBulletHitTarget(bulletEl, target) {
   return top && left;
 }
 function handleTargetHit(target, targetType, classTarget) {
+  // console.log('classTarget: ', classTarget);
+  // console.log('targetType: ', targetType);
+  // console.log('target: ', target);
   const suffixLookup = {
-    skin1: '',
+    skin1: '-1',
     skin2: '-2',
     skin3: '-3',
   };
 
   const suffix = suffixLookup[classTarget] || '';
-  target.className = targetType + ' boom' + suffix;
+  target.className = targetType + ' boom' + ' boom' + suffix;
 
   removeTargetToHit(target);
   setBoomSound();
@@ -130,6 +137,7 @@ function handleTargetHit(target, targetType, classTarget) {
 function createNewTarget() {
   const randomNumber = Math.random();
   const createEntity = randomNumber < 0.5 ? createEnemy : createAsteroid;
+
   if (randomNumber > 0.8) {
     createEntity();
     createEntity();
