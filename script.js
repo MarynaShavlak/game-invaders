@@ -24,7 +24,7 @@ const gameFieldWidth = document.querySelector('body').offsetWidth;
 const gameFieldHeight = document.querySelector('body').offsetHeight;
 
 let deathEnemiesQuantity = 0;
-let goal = 300;
+let goal = 200;
 let enemySpeed = 10;
 
 firstSkin.onclick = onSkinClick;
@@ -115,9 +115,6 @@ function isBulletHitTarget(bulletEl, target) {
   return top && left;
 }
 function handleTargetHit(target, targetType, classTarget) {
-  // console.log('classTarget: ', classTarget);
-  // console.log('targetType: ', targetType);
-  // console.log('target: ', target);
   const suffixLookup = {
     skin1: '-1',
     skin2: '-2',

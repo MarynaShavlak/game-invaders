@@ -1,4 +1,3 @@
-// let closestEnemies = [];
 let isBombedRuined = false;
 let killedByBombEnemies = [];
 
@@ -111,6 +110,21 @@ function getKilledByBombEnemies(enemiesAndLifesToBeBombed) {
   return killedByBombEnemies;
 }
 
+function handleEnemiesAndLifesToBeBombed(closestEnemies) {
+  for (let i = 0; i < closestEnemies.length; i++) {
+    const element = closestEnemies[i];
+    const targetType = element.className.split(' ')[0];
+    const classTarget = element.className.split(' ')[1];
+
+    if (targetType === 'additional-life') {
+      increaseLifesQuantity();
+      handleLifeRemoval(element);
+    } else {
+      handleTargetHit(element, targetType, classTarget);
+    }
+  }
+}
+
 function isBombHit(bulletEl) {
   const bombsList = document.querySelectorAll('.bomb');
   let ter;
@@ -129,9 +143,11 @@ function isBombHit(bulletEl) {
         allExistingEnemiesAndLifes = getAllExistingEnemiesAndLifes();
         enemiesAndLifesToBeBombed = getEnemiesAndLifesToBeBombed(
           ter,
-          enemiesAndLifes,
+          allExistingEnemiesAndLifes,
         );
+        console.log('enemiesAndLifesToBeBombed: ', enemiesAndLifesToBeBombed);
         killedByBombEnemies = getKilledByBombEnemies(enemiesAndLifesToBeBombed);
+        console.log('killedByBombEnemies: ', killedByBombEnemies);
 
         // const innerElements = gameElementsBlock.children;
         // for (let i = 0; i < innerElements.length; i++) {
@@ -158,26 +174,31 @@ function isBombHit(bulletEl) {
         //     killedByBombEnemies.push(el);
         //   }
         // }
-        console.log('killedByBombEnemies: ', killedByBombEnemies);
         ter.remove();
         isBombedRuined = true;
-        console.log('closestEnemies: ', closestEnemies);
-        if (closestEnemies.length) {
-          for (let i = 0; i < closestEnemies.length; i++) {
-            const element = closestEnemies[i];
-            const targetType = element.className.split(' ')[0];
-            const classTarget = element.className.split(' ')[1];
-            if (targetType === 'additional-life') {
-              increaseLifesQuantity();
-              handleLifeRemoval(element);
-            } else {
-              handleTargetHit(element, targetType, classTarget);
-            }
-          }
+        if (enemiesAndLifesToBeBombed.length) {
+          handleEnemiesAndLifesToBeBombed(enemiesAndLifesToBeBombed);
           setTimeout(() => {
             isBombedRuined = false;
           }, 800);
         }
+
+        // if (enemiesAndLifesToBeBombed.length) {
+        //   for (let i = 0; i < enemiesAndLifesToBeBombed.length; i++) {
+        //     const element = enemiesAndLifesToBeBombed[i];
+        //     const targetType = element.className.split(' ')[0];
+        //     const classTarget = element.className.split(' ')[1];
+        //     if (targetType === 'additional-life') {
+        //       increaseLifesQuantity();
+        //       handleLifeRemoval(element);
+        //     } else {
+        //       handleTargetHit(element, targetType, classTarget);
+        //     }
+        //   }
+        //   setTimeout(() => {
+        //     isBombedRuined = false;
+        //   }, 800);
+        // }
         handleBombRemoval(bomb);
 
         return true;
