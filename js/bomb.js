@@ -1,3 +1,5 @@
+let closestEnemies = [];
+
 function createBombElement() {
   const bomb = document.createElement('div');
   bomb.className = 'bomb';
@@ -54,7 +56,40 @@ function isBombHit(bulletEl) {
     if (bomb) {
       let isHit = isBulletHitTarget(bulletEl, bomb);
       if (isHit) {
-        console.log('yes');
+        const { x, y, width, height } = getCoordinatesAndDimensions(bomb);
+        const ter = document.createElement('div');
+        ter.style.position = 'absolute';
+        ter.style.backgroundColor = 'red';
+        ter.style.width = '300px';
+        ter.style.height = '300px';
+        ter.style.left = x - 110 + 'px';
+        ter.style.top = y - 110 + 'px';
+        ter.style.zIndex = 3;
+        gameElementsBlock.appendChild(ter);
+        console.dir(ter);
+
+        console.log('height: ', height);
+        console.log('width: ', width);
+        console.log('y: ', y);
+        console.log('x: ', x);
+
+        let enemiesAndLifes = [];
+        const innerElements = gameElementsBlock.children;
+        for (let i = 0; i < innerElements.length; i++) {
+          let el = innerElements[i];
+          const isEnemy = el.classList.contains('enemy');
+          const isAsteroid = el.classList.contains('asteroid');
+          const isAdditionalLife = el.classList.contains('additional-life');
+          if (isEnemy || isAsteroid || isAdditionalLife) {
+            enemiesAndLifes.push(el);
+            const isIntersecting = checkIfIntersecting(ter, el);
+            if (isIntersecting) {
+              closestEnemies.push(el);
+            }
+          }
+        }
+        console.log('closestEnemies: ', closestEnemies);
+
         // increaseLifesQuantity();
         // handleLifeRemoval(life);
 
