@@ -28,6 +28,8 @@ Invaders is a fast-paced, browser-based space shooter game where players control
 - Win the game by reaching a target score, lose when lives reach zero
 - End game and restart functionality
 - Random power-ups like additional lives and bombs
+- Boom GIF visual effect on enemy, asteroid, or bomb destruction
+- Moving planets in the background
 
 ### Sound Features
 
